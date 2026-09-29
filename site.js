@@ -58,7 +58,7 @@
     by: "Suomalainen sananlasku",
     url: "https://conlexis-23.it.helsinki.fi/kaataa/"
   };
-  const copy = {en:{greeting:"Hello.",name:"I'm Ahmad.",lead:"Always curious. Open to conversation.",detail:"A personal introduction",contact:"Connect on LinkedIn",replay:"Replay introduction ↻",title:"Ahmad · A personal introduction",portrait:"Pencil portrait of Ahmad",language:"Choose language"},fi:{greeting:"Moi.",name:"Mä oon Ahmad.",lead:"Aina utelias. Jutellaan.",detail:"Lyhyesti minusta",contact:"Ota yhteyttä LinkedInissä",replay:"Toista esittely ↻",title:"Ahmad · Lyhyesti minusta",portrait:"Lyijykynämuotokuva Ahmadista",language:"Valitse kieli"}};
+  const copy = {en:{greeting:"Hello.",name:"I'm Ahmad.",lead:"Always curious. Open to conversation.",detail:"Curiosity, always.",contact:"Connect on LinkedIn",replay:"Replay introduction ↻",title:"Ahmad · A personal introduction",portrait:"Pencil portrait of Ahmad",language:"Choose language"},fi:{greeting:"Moi.",name:"Mä oon Ahmad.",lead:"Aina utelias. Jutellaan.",detail:"Aina utelias.",contact:"Ota yhteyttä LinkedInissä",replay:"Toista esittely ↻",title:"Ahmad · Lyhyesti minusta",portrait:"Lyijykynämuotokuva Ahmadista",language:"Valitse kieli"}};
   const screen = document.getElementById("warm");
   const replay = document.getElementById("replay");
   const quoteText = document.querySelector(".quote p");
