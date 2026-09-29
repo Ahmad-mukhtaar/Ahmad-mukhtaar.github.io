@@ -1,61 +1,71 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ahmad · A personal introduction</title>
-<meta name="description" content="A personal introduction to Ahmad. Always curious. Open to conversation.">
-<meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; connect-src 'none'">
-<link rel="stylesheet" href="styles.css?v=vappu">
-</head>
-<body>
-<main>
-<section class="screen warm motion" id="warm">
-<nav class="nav" aria-label="Editorial identity">
-<span class="wordmark">Ahmad.</span>
-<div class="nav-right">
-<span class="nav-detail" data-copy="detail">Curiosity, always.</span>
-<div class="language" hidden role="group" aria-label="Choose language">
-<button type="button" data-language="en" lang="en" aria-pressed="true">English</button>
-<button type="button" data-language="fi" lang="fi" aria-pressed="false">Suomi</button>
-</div>
-</div>
-</nav>
-<div class="hero">
-<div class="intro">
-<p class="profession" data-copy="profession">Statistician</p>
-<h1>
-<span data-copy="greeting">Hello.</span>
-<em data-copy="name">I'm Ahmad.</em>
-</h1>
-<p class="lead" data-copy="lead">Finding structure in uncertainty.</p>
-<p class="stat-note" data-copy="bayes" aria-label="Bayes’ rule: posterior probability is proportional to likelihood times prior probability">P(θ | x) ∝ P(x | θ) P(θ)</p>
-<div class="links">
-<a class="primary link" href="https://www.linkedin.com/in/ahmadmukhtaar/" target="_blank" rel="noopener noreferrer">
-<span data-copy="contact">Connect on LinkedIn</span> <span class="arrow" aria-hidden="true">↗</span>
-</a>
-</div>
-</div>
-<figure class="portrait">
-<div class="portrait-stage">
-<svg class="strokes" viewBox="0 0 450 550" aria-hidden="true">
-<path d="M75 167C42 223 45 316 76 361M360 75c29 22 43 64 44 106M90 457c75 29 194 24 269-6"/>
-</svg>
-<img class="sketch" src="portrait-sketch.png?v=watermarked" alt="Pencil portrait of Ahmad" width="1098" height="1433">
-</div>
-</figure>
-</div>
-<footer class="bottom">
-<blockquote class="quote">
-<p>“Look within; within is the fountain of all good.”</p>
-<a href="https://m.gutenberg.org/files/2680/2680-h/2680-h.htm" target="_blank" rel="noopener noreferrer">Marcus Aurelius · Meditations ↗</a>
-</blockquote>
-<button class="replay" id="replay">Replay introduction ↻</button>
-</footer>
-</section>
-</main>
-<script src="site.js?v=vappu" defer>
-</script>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ahmad · A personal introduction</title>
+    <meta name="description" content="A personal introduction to Ahmad. Always curious. Open to conversation.">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; connect-src 'none'">
+    <link rel="stylesheet" href="styles.css?v=contours">
+  </head>
+  <body>
+    <main>
+      <section class="screen warm motion" id="warm">
+        <nav class="nav" aria-label="Editorial identity">
+          <span class="wordmark">Ahmad.</span>
+          <div class="nav-right">
+            <span class="nav-detail" data-copy="detail">Curiosity, always.</span>
+            <div class="language" hidden role="group" aria-label="Choose language">
+              <button type="button" data-language="en" lang="en" aria-pressed="true">English</button>
+              <button type="button" data-language="fi" lang="fi" aria-pressed="false">Suomi</button>
+            </div>
+          </div>
+        </nav>
+        <div class="hero">
+          <div class="intro">
+            <p class="profession" data-copy="profession">Statistician</p>
+            <h1>
+            <span data-copy="greeting">Hello.</span>
+            <em data-copy="name">I'm Ahmad.</em>
+          </h1>
+          <p class="lead" data-copy="lead">Finding structure in uncertainty.</p>
+          <p class="stat-note" data-copy="bayes" aria-label="Bayes’ rule: posterior probability is proportional to likelihood times prior probability">P(θ | x) ∝ P(x | θ) P(θ)</p>
+          <a class="contact-link" href="https://www.linkedin.com/in/ahmadmukhtaar/" target="_blank" rel="noopener noreferrer">
+            <span data-copy="contact">Connect on LinkedIn</span> <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <figure class="portrait">
+          <div class="portrait-stage">
+            <svg class="strokes" viewBox="0 0 450 550" aria-hidden="true">
+              <defs>
+                <mask id="portrait-clearance">
+                  <rect width="450" height="550" fill="white"/>
+                  <ellipse cx="230" cy="280" rx="145" ry="230" fill="black"/>
+                </mask>
+              </defs>
+              <g mask="url(#portrait-clearance)" transform="rotate(-24 225 275)">
+                <ellipse cx="225" cy="275" rx="212" ry="202"/>
+                <ellipse cx="225" cy="275" rx="185" ry="176"/>
+                <ellipse cx="225" cy="275" rx="158" ry="150"/>
+                <circle cx="411" cy="193" r="2"/>
+                <circle cx="53" cy="349" r="2"/>
+              </g>
+            </svg>
+            <img class="sketch" src="portrait-sketch.png?v=watermarked" alt="Pencil portrait of Ahmad" width="1098" height="1433">
+          </div>
+        </figure>
+      </div>
+      <footer class="bottom">
+        <blockquote class="quote">
+          <p>“Look within; within is the fountain of all good.”</p>
+          <a href="https://m.gutenberg.org/files/2680/2680-h/2680-h.htm" target="_blank" rel="noopener noreferrer">Marcus Aurelius · Meditations ↗</a>
+        </blockquote>
+        <button class="replay" id="replay">Replay introduction ↻</button>
+      </footer>
+    </section>
+  </main>
+  <script src="site.js?v=contours" defer>
+  </script>
 </body>
 </html>

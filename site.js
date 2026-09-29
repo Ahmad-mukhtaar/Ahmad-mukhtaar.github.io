@@ -2,57 +2,57 @@
 
 (() => {
   const quotes = [
-  {
-    "text": "Knowledge without action is madness and action without knowledge is void.",
-    "by": "Al-Ghazali · Letter to a Disciple",
-    "url": "https://www.emaanlibrary.com/wp-content/uploads/2019/10/letter-to-a-disciple-english.pdf"
-  },
-  {
-    "text": "The thirst for knowledge was innate in me from an early age.",
-    "by": "Al-Ghazali · Deliverance from Error",
-    "url": "https://www.ghazali.org/books/md/gz101.htm"
-  },
-  {
-    "text": "Knowledge of self is the key to the knowledge of God.",
-    "by": "Al-Ghazali · The Alchemy of Happiness",
-    "url": "https://data.nur.nu/Kutub/English/Ghazali_Alchemy-of-Happiness.pdf#page=8"
-  },
-  {
-    "text": "Imperfections are the mirror for the quality of perfection.",
-    "by": "Rumi · Masnavi, I.3210",
-    "url": "https://www.dar-al-masnavi.org/n-I-3157.html"
-  },
-  {
-    "text": "Don’t stir it up, so that the water may become clear…",
-    "by": "Rumi · Masnavi, IV.2481",
-    "url": "https://www.dar-al-masnavi.org/n-IV-2460.html"
-  },
-  {
-    "text": "Look within; within is the fountain of all good.",
-    "by": "Marcus Aurelius · Meditations",
-    "url": "https://www.gutenberg.org/files/2680/2680-h/2680-h.htm"
-  },
-  {
-    "text": "Learning without thought is naught; thought without learning is dangerous.",
-    "by": "Confucius · Analects, II.15",
-    "url": "https://www.gutenberg.org/files/24055/24055-h/24055-h.htm"
-  },
-  {
-    "text": "All men by nature desire to know.",
-    "by": "Aristotle · Metaphysics, I.1",
-    "url": "https://classics.mit.edu/Aristotle/metaphysics.1.i.html"
-  },
-  {
-    "text": "The journey of a thousand li commenced with a single step.",
-    "by": "Laozi · Tao Te Ching, 64",
-    "url": "https://www.gutenberg.org/files/216/216-h/216-h.htm"
-  },
-  {
-    "text": "While we are postponing, life speeds by.",
-    "by": "Seneca · Letters, 1.2",
-    "url": "https://en.wikisource.org/wiki/Moral_letters_to_Lucilius/Letter_1"
-  }
-];
+    {
+      "text": "Knowledge without action is madness and action without knowledge is void.",
+      "by": "Al-Ghazali · Letter to a Disciple",
+      "url": "https://www.emaanlibrary.com/wp-content/uploads/2019/10/letter-to-a-disciple-english.pdf"
+    },
+    {
+      "text": "The thirst for knowledge was innate in me from an early age.",
+      "by": "Al-Ghazali · Deliverance from Error",
+      "url": "https://www.ghazali.org/books/md/gz101.htm"
+    },
+    {
+      "text": "Knowledge of self is the key to the knowledge of God.",
+      "by": "Al-Ghazali · The Alchemy of Happiness",
+      "url": "https://data.nur.nu/Kutub/English/Ghazali_Alchemy-of-Happiness.pdf#page=8"
+    },
+    {
+      "text": "Imperfections are the mirror for the quality of perfection.",
+      "by": "Rumi · Masnavi, I.3210",
+      "url": "https://www.dar-al-masnavi.org/n-I-3157.html"
+    },
+    {
+      "text": "Don’t stir it up, so that the water may become clear…",
+      "by": "Rumi · Masnavi, IV.2481",
+      "url": "https://www.dar-al-masnavi.org/n-IV-2460.html"
+    },
+    {
+      "text": "Look within; within is the fountain of all good.",
+      "by": "Marcus Aurelius · Meditations",
+      "url": "https://www.gutenberg.org/files/2680/2680-h/2680-h.htm"
+    },
+    {
+      "text": "Learning without thought is naught; thought without learning is dangerous.",
+      "by": "Confucius · Analects, II.15",
+      "url": "https://www.gutenberg.org/files/24055/24055-h/24055-h.htm"
+    },
+    {
+      "text": "All men by nature desire to know.",
+      "by": "Aristotle · Metaphysics, I.1",
+      "url": "https://classics.mit.edu/Aristotle/metaphysics.1.i.html"
+    },
+    {
+      "text": "The journey of a thousand li commenced with a single step.",
+      "by": "Laozi · Tao Te Ching, 64",
+      "url": "https://www.gutenberg.org/files/216/216-h/216-h.htm"
+    },
+    {
+      "text": "While we are postponing, life speeds by.",
+      "by": "Seneca · Letters, 1.2",
+      "url": "https://en.wikisource.org/wiki/Moral_letters_to_Lucilius/Letter_1"
+    }
+  ];
   const proverb = {
     text: "Ei oppi ojaan kaada.",
     by: "Suomalainen sananlasku",
