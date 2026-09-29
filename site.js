@@ -58,7 +58,36 @@
     by: "Suomalainen sananlasku",
     url: "https://conlexis-23.it.helsinki.fi/kaataa/"
   };
-  const copy = {en:{greeting:"Hello.",name:"I'm Ahmad.",lead:"Always curious. Open to conversation.",detail:"Curiosity, always.",contact:"Connect on LinkedIn",replay:"Replay introduction ↻",title:"Ahmad · A personal introduction",portrait:"Pencil portrait of Ahmad",language:"Choose language"},fi:{greeting:"Moi.",name:"Mä oon Ahmad.",lead:"Aina utelias. Jutellaan.",detail:"Aina utelias.",contact:"Ota yhteyttä LinkedInissä",replay:"Toista esittely ↻",title:"Ahmad · Lyhyesti minusta",portrait:"Lyijykynämuotokuva Ahmadista",language:"Valitse kieli"}};
+  const copy = {
+    "en": {
+      "greeting": "Hello.",
+      "name": "I'm Ahmad.",
+      "profession": "Statistician",
+      "lead": "Finding structure in uncertainty.",
+      "detail": "Curiosity, always.",
+      "contact": "Connect on LinkedIn",
+      "replay": "Replay introduction ↻",
+      "title": "Ahmad · Statistician",
+      "portrait": "Pencil portrait of Ahmad",
+      "language": "Choose language",
+      "bayes": "P(θ | x) ∝ P(x | θ) P(θ)",
+      "bayesLabel": "Bayes’ rule: posterior probability is proportional to likelihood times prior probability"
+    },
+    "fi": {
+      "greeting": "Moi.",
+      "name": "Mä oon Ahmad.",
+      "profession": "Tilastotieteilijä",
+      "lead": "Epävarmuudesta ymmärrykseen.",
+      "detail": "Aina utelias.",
+      "contact": "Ota yhteyttä LinkedInissä",
+      "replay": "Toista esittely ↻",
+      "title": "Ahmad · Tilastotieteilijä",
+      "portrait": "Lyijykynämuotokuva Ahmadista ylioppilaslakissa",
+      "language": "Valitse kieli",
+      "bayes": "P(θ | x) ∝ P(x | θ) P(θ)",
+      "bayesLabel": "Bayesin kaava: posteriori on verrannollinen uskottavuuden ja priorin tuloon"
+    }
+  };
   const screen = document.getElementById("warm");
   const replay = document.getElementById("replay");
   const quoteText = document.querySelector(".quote p");
@@ -89,7 +118,10 @@
       element.textContent = content[element.dataset.copy];
     });
     replay.textContent = content.replay;
-    document.querySelector(".sketch").alt = content.portrait;
+    const portrait = document.querySelector(".sketch");
+    portrait.alt = content.portrait;
+    portrait.src = language === "fi" ? "portrait-vappu.png" : "portrait-sketch.png?v=watermarked";
+    document.querySelector(".stat-note").setAttribute("aria-label", content.bayesLabel);
     document.querySelector(".nav").setAttribute("aria-label", content.detail);
     languagePicker.setAttribute("aria-label", content.language);
     languageButtons.forEach(button => {

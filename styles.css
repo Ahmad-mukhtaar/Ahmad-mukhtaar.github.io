@@ -97,3 +97,19 @@ to{stroke-dashoffset:0}
 .language{gap:12px}
 .warm h1 em{display:block;margin-left:0;font-size:.69em}
 }
+
+.profession {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.stat-note {
+  margin: -8px 0 24px;
+  color: var(--muted);
+  font-family: Baskerville, Georgia, serif;
+  font-size: 15px;
+  letter-spacing: .025em;
+}
