@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Ahmad · A personal introduction</title>
-    <meta name="description" content="A personal introduction to Ahmad. Always curious. Open to conversation.">
+    <title>Ahmad · Statistician &amp; data scientist</title>
+    <meta name="description" content="Ahmad. Statistician and data scientist. Finding structure in uncertainty.">
     <meta name="referrer" content="no-referrer">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; connect-src 'none'">
-    <link rel="stylesheet" href="styles.css?v=portrait-protection">
+    <link rel="stylesheet" href="styles.css?v=inference">
   </head>
   <body>
     <main>
@@ -24,17 +24,42 @@
         </nav>
         <div class="hero">
           <div class="intro">
-            <p class="profession" data-copy="profession">Statistician</p>
             <h1>
-            <span data-copy="greeting">Hello.</span>
-            <em data-copy="name">I'm Ahmad.</em>
-          </h1>
-          <p class="lead" data-copy="lead">Finding structure in uncertainty.</p>
-          <p class="stat-note" data-copy="bayes" aria-label="Bayes’ rule: posterior probability is proportional to likelihood times prior probability">P(θ | x) ∝ P(x | θ) P(θ)</p>
-          <a class="contact-link" href="https://www.linkedin.com/in/ahmadmukhtaar/" target="_blank" rel="noopener noreferrer">
-            <span data-copy="contact">Connect on LinkedIn</span> <span class="arrow" aria-hidden="true">↗</span>
-          </a>
-        </div>
+              <span data-copy="greeting">Hello.</span>
+              <em data-copy="name">I'm Ahmad.</em>
+            </h1>
+            <p class="lead" data-copy="lead">Finding structure in uncertainty.</p>
+            <p class="profession" data-copy="profession">Statistician · Data scientist</p>
+            <a class="contact-link" href="https://www.linkedin.com/in/ahmadmukhtaar/" target="_blank" rel="noopener noreferrer">
+              <span data-copy="contact">Connect on LinkedIn</span> <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <figure class="inference" hidden>
+              <figcaption class="inference-heading">
+                <span data-copy="inferenceTitle">Evidence &amp; uncertainty</span>
+                <span class="inference-legend" aria-hidden="true">
+                  <span class="prior-label" data-copy="prior">Prior</span>
+                  <span class="posterior-label" data-copy="posterior">Updated</span>
+                </span>
+              </figcaption>
+              <svg class="inference-plot" viewBox="0 0 400 105" role="img" aria-labelledby="inference-description">
+                <title id="inference-description">An illustrative Bayesian update of a normal mean.</title>
+                <path class="plot-axis" d="M12 84H388"/>
+                <path class="posterior-area"/>
+                <path class="prior-curve"/>
+                <path class="posterior-curve"/>
+                <text x="12" y="101">−3</text>
+                <text x="200" y="101" text-anchor="middle">0</text>
+                <text x="388" y="101" text-anchor="end">3</text>
+              </svg>
+              <div class="evidence-control">
+                <label for="evidence" data-copy="evidence">Evidence</label>
+                <input id="evidence" type="range" min="0" max="12" value="3" step="1" aria-describedby="inference-summary">
+                <output for="evidence" id="evidence-count">3</output>
+              </div>
+              <p class="inference-summary" id="inference-summary" data-copy="inferenceHint">Move the slider. Watch uncertainty change.</p>
+              <p class="stat-note" aria-label="Bayes’ rule: posterior density is proportional to likelihood times prior density"><i>p</i>(<i>θ</i> | <i>x</i>) ∝ <i>p</i>(<i>x</i> | <i>θ</i>)<i>p</i>(<i>θ</i>)</p>
+            </figure>
+          </div>
         <figure class="portrait">
           <div class="portrait-stage">
             <svg class="strokes" viewBox="0 0 450 550" aria-hidden="true">
@@ -65,7 +90,7 @@
       </footer>
     </section>
   </main>
-  <script src="site.js?v=contours" defer>
+  <script src="site.js?v=inference" defer>
   </script>
 </body>
 </html>
