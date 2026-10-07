@@ -7,7 +7,7 @@
     <meta name="description" content="Ahmad. Statistician and data scientist. Finding structure in uncertainty.">
     <meta name="referrer" content="no-referrer">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; connect-src 'none'">
-    <link rel="stylesheet" href="styles.css?v=inference">
+    <link rel="stylesheet" href="styles.css?v=uncertainty">
   </head>
   <body>
     <main>
@@ -30,67 +30,76 @@
             </h1>
             <p class="lead" data-copy="lead">Finding structure in uncertainty.</p>
             <p class="profession" data-copy="profession">Statistician · Data scientist</p>
-            <a class="contact-link" href="https://www.linkedin.com/in/ahmadmukhtaar/" target="_blank" rel="noopener noreferrer">
-              <span data-copy="contact">Connect on LinkedIn</span> <span class="arrow" aria-hidden="true">↗</span>
-            </a>
-            <figure class="inference" hidden>
-              <figcaption class="inference-heading">
-                <span data-copy="inferenceTitle">Evidence &amp; uncertainty</span>
-                <span class="inference-legend" aria-hidden="true">
-                  <span class="prior-label" data-copy="prior">Prior</span>
-                  <span class="posterior-label" data-copy="posterior">Updated</span>
-                </span>
-              </figcaption>
-              <svg class="inference-plot" viewBox="0 0 400 105" role="img" aria-labelledby="inference-description">
-                <title id="inference-description">An illustrative Bayesian update of a normal mean.</title>
-                <path class="plot-axis" d="M12 84H388"/>
-                <path class="posterior-area"/>
-                <path class="prior-curve"/>
-                <path class="posterior-curve"/>
-                <text x="12" y="101">−3</text>
-                <text x="200" y="101" text-anchor="middle">0</text>
-                <text x="388" y="101" text-anchor="end">3</text>
+            <div class="intro-actions">
+              <a class="contact-link" href="https://www.linkedin.com/in/ahmadmukhtaar/" target="_blank" rel="noopener noreferrer">
+                <span data-copy="contact">Connect on LinkedIn</span> <span class="arrow" aria-hidden="true">↗</span>
+              </a>
+              <button class="explore" id="explore" type="button" aria-haspopup="dialog" data-copy="explore" hidden>Explore uncertainty ↗</button>
+            </div>
+          </div>
+          <figure class="portrait">
+            <div class="portrait-stage">
+              <svg class="strokes" viewBox="0 0 450 550" aria-hidden="true">
+                <defs>
+                  <mask id="portrait-clearance">
+                    <rect width="450" height="550" fill="white"/>
+                    <ellipse cx="230" cy="280" rx="145" ry="230" fill="black"/>
+                  </mask>
+                </defs>
+                <g mask="url(#portrait-clearance)" transform="rotate(-24 225 275)">
+                  <ellipse cx="225" cy="275" rx="216" ry="234"/>
+                  <ellipse cx="225" cy="275" rx="180" ry="195"/>
+                  <ellipse cx="225" cy="275" rx="144" ry="156"/>
+                </g>
               </svg>
-              <div class="evidence-control">
-                <label for="evidence" data-copy="evidence">Evidence</label>
-                <input id="evidence" type="range" min="0" max="12" value="3" step="1" aria-describedby="inference-summary">
-                <output for="evidence" id="evidence-count">3</output>
-              </div>
-              <p class="inference-summary" id="inference-summary" data-copy="inferenceHint">Move the slider. Watch uncertainty change.</p>
-              <p class="stat-note" aria-label="Bayes’ rule: posterior density is proportional to likelihood times prior density"><i>p</i>(<i>θ</i> | <i>x</i>) ∝ <i>p</i>(<i>x</i> | <i>θ</i>)<i>p</i>(<i>θ</i>)</p>
-            </figure>
-          </div>
-        <figure class="portrait">
-          <div class="portrait-stage">
-            <svg class="strokes" viewBox="0 0 450 550" aria-hidden="true">
-              <defs>
-                <mask id="portrait-clearance">
-                  <rect width="450" height="550" fill="white"/>
-                  <ellipse cx="230" cy="280" rx="145" ry="230" fill="black"/>
-                </mask>
-              </defs>
-              <g mask="url(#portrait-clearance)" transform="rotate(-24 225 275)">
-                <ellipse cx="225" cy="275" rx="212" ry="202"/>
-                <ellipse cx="225" cy="275" rx="185" ry="176"/>
-                <ellipse cx="225" cy="275" rx="158" ry="150"/>
-                <circle cx="411" cy="193" r="2"/>
-                <circle cx="53" cy="349" r="2"/>
-              </g>
-            </svg>
-            <img class="sketch" src="portrait-sketch.png?v=watermarked" alt="Pencil portrait of Ahmad" width="1098" height="1433" draggable="false">
-          </div>
-        </figure>
+              <img class="sketch" src="portrait-sketch.png?v=watermarked" alt="Pencil portrait of Ahmad" width="1098" height="1433" draggable="false">
+            </div>
+          </figure>
+        </div>
+        <footer class="bottom">
+          <blockquote class="quote">
+            <p>“Look within; within is the fountain of all good.”</p>
+            <a href="https://m.gutenberg.org/files/2680/2680-h/2680-h.htm" target="_blank" rel="noopener noreferrer">Marcus Aurelius · Meditations ↗</a>
+          </blockquote>
+          <button class="replay" id="replay">Replay introduction ↻</button>
+        </footer>
+      </section>
+    </main>
+    <dialog class="experiment" id="experiment" aria-labelledby="experiment-title" aria-describedby="experiment-intro">
+      <header class="experiment-top">
+        <span class="experiment-eyebrow" data-copy="experimentLabel">A small experiment</span>
+        <button class="experiment-close" id="experiment-close" type="button" data-copy="close" autofocus>Close ×</button>
+      </header>
+      <h2 id="experiment-title" data-copy="experimentTitle">How does new evidence change what we believe?</h2>
+      <p class="experiment-intro" id="experiment-intro" data-copy="experimentIntro">Each click adds a measurement (a dot). The curve moves as the estimated average changes; a narrower curve means less uncertainty.</p>
+      <figure class="inference">
+        <div class="inference-legend" aria-hidden="true">
+          <span class="prior-label" data-copy="prior">Before evidence</span>
+          <span class="posterior-label" data-copy="posterior">After evidence</span>
+          <span class="observation-label" data-copy="observed">Observations</span>
+        </div>
+        <svg class="inference-plot" viewBox="0 0 400 180" role="img" aria-labelledby="inference-description">
+          <title id="inference-description">An illustrative Bayesian update of a normal mean.</title>
+          <path class="plot-axis" d="M12 135H388"/>
+          <path class="posterior-area"/>
+          <path class="prior-curve"/>
+          <path class="posterior-curve"/>
+          <g class="observation-points" aria-hidden="true"></g>
+          <text x="12" y="176">−3</text>
+          <text x="200" y="176" text-anchor="middle">0</text>
+          <text x="388" y="176" text-anchor="end">3</text>
+        </svg>
+        <figcaption class="plot-caption" data-copy="axisLabel">Possible average values · θ</figcaption>
+      </figure>
+      <div class="experiment-actions">
+        <button class="add-observation" id="add-observation" type="button" data-copy="addObservation">Add an observation +</button>
+        <button class="reset-observations" id="reset-observations" type="button" data-copy="reset" disabled>Reset</button>
       </div>
-      <footer class="bottom">
-        <blockquote class="quote">
-          <p>“Look within; within is the fountain of all good.”</p>
-          <a href="https://m.gutenberg.org/files/2680/2680-h/2680-h.htm" target="_blank" rel="noopener noreferrer">Marcus Aurelius · Meditations ↗</a>
-        </blockquote>
-        <button class="replay" id="replay">Replay introduction ↻</button>
-      </footer>
-    </section>
-  </main>
-  <script src="site.js?v=inference" defer>
-  </script>
-</body>
+      <output class="inference-summary" id="inference-summary" aria-live="polite" aria-atomic="true"></output>
+      <p class="model-note" data-copy="modelNote">Dashed line: our starting belief. Solid line: our updated belief after seeing the measurements. This is a simplified example.</p>
+      <p class="stat-note" aria-label="Bayes’ rule: posterior density is proportional to likelihood times prior density"><i>p</i>(<i>θ</i> | <i>x</i>) ∝ <i>p</i>(<i>x</i> | <i>θ</i>)<i>p</i>(<i>θ</i>)</p>
+    </dialog>
+    <script src="site.js?v=uncertainty" defer>
+    </script>
+  </body>
 </html>

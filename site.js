@@ -71,11 +71,21 @@
       "portrait": "Pencil portrait of Ahmad",
       "language": "Choose language",
       "bayesLabel": "Bayes’ rule: posterior density is proportional to likelihood times prior density",
-      "inferenceTitle": "Evidence & uncertainty",
-      "prior": "Prior",
-      "posterior": "Updated",
-      "evidence": "Evidence",
-      "inferenceHint": "Slide to explore · illustrative data",
+      "explore": "Explore uncertainty ↗",
+      "experimentLabel": "A small experiment",
+      "experimentTitle": "How does new evidence change what we believe?",
+      "experimentIntro": "Each click adds a measurement (a dot). The curve moves as the estimated average changes; a narrower curve means less uncertainty.",
+      "close": "Close ×",
+      "addObservation": "Add an observation +",
+      "reset": "Reset",
+      "observed": "Observations",
+      "axisLabel": "Possible average values · θ",
+      "modelNote": "Dashed line: our starting belief. Solid line: our updated belief after seeing the measurements. This is a simplified example.",
+      "empty": "No observations yet. Both curves begin together.",
+      "summary": "{n} {observations} · latest measurement {value} · estimated average {mean}.",
+      "finished": "All 12 observations added. Reset to explore again.",
+      "prior": "Before evidence",
+      "posterior": "After evidence",
       "observations": "observations",
       "observation": "observation",
       "plotDescription": "Illustrative Bayesian normal model. {n} {observations}; estimated mean {mean}; uncertainty, measured as posterior standard deviation, {sd}."
@@ -92,11 +102,21 @@
       "portrait": "Lyijykynämuotokuva Ahmadista ylioppilaslakissa",
       "language": "Valitse kieli",
       "bayesLabel": "Bayesin kaava: posterioritiheys on verrannollinen uskottavuuden ja prioritiheyden tuloon",
-      "inferenceTitle": "Havainnot ja epävarmuus",
-      "prior": "Priori",
-      "posterior": "Posteriori",
-      "evidence": "Havaintoja",
-      "inferenceHint": "Kokeile liukusäädintä · esimerkkiaineisto",
+      "explore": "Tutki epävarmuutta ↗",
+      "experimentLabel": "Pieni kokeilu",
+      "experimentTitle": "Miten uudet havainnot muuttavat käsitystämme?",
+      "experimentIntro": "Jokainen painallus lisää mittauksen (pisteen). Käyrä siirtyy, kun keskiarvon arvio muuttuu; kapeampi käyrä tarkoittaa vähemmän epävarmuutta.",
+      "close": "Sulje ×",
+      "addObservation": "Lisää havainto +",
+      "reset": "Aloita alusta",
+      "observed": "Havainnot",
+      "axisLabel": "Keskiarvon mahdolliset arvot · θ",
+      "modelNote": "Katkoviiva: alkuoletuksemme. Yhtenäinen viiva: havaintojen perusteella päivitetty käsityksemme. Tämä on yksinkertaistettu esimerkki.",
+      "empty": "Ei vielä havaintoja. Käyrät ovat aluksi samat.",
+      "summary": "{n} {observations} · uusin mittaus {value} · keskiarvon arvio {mean}.",
+      "finished": "Kaikki 12 havaintoa lisätty. Aloita alusta kokeillaksesi uudelleen.",
+      "prior": "Ennen havaintoja",
+      "posterior": "Havaintojen jälkeen",
       "observations": "havaintoa",
       "observation": "havainto",
       "plotDescription": "Bayesilaisen normaalimallin havainnollistus. {n} {observations}; keskiarvon estimaatti {mean}; epävarmuus posteriorin keskihajontana {sd}."
@@ -108,15 +128,20 @@
   const quoteSource = document.querySelector(".quote a");
   const languagePicker = document.querySelector(".language");
   const languageButtons = [...document.querySelectorAll("[data-language]")];
-  const inference = document.querySelector(".inference");
-  const evidence = document.getElementById("evidence");
-  const evidenceCount = document.getElementById("evidence-count");
+  const explore = document.getElementById("explore");
+  const experiment = document.getElementById("experiment");
+  const closeExperiment = document.getElementById("experiment-close");
+  const addObservation = document.getElementById("add-observation");
+  const resetObservations = document.getElementById("reset-observations");
+  const summary = document.getElementById("inference-summary");
+  const observationPoints = document.querySelector(".observation-points");
   const posteriorCurve = document.querySelector(".posterior-curve");
   const posteriorArea = document.querySelector(".posterior-area");
   const plotDescription = document.getElementById("inference-description");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   // Normal prior N(0, 1), known observation variance 1; illustrative observations.
   const observations = [0.7, 1.2, 0.9, 1.4, 1.1, 0.8, 1.3, 0.6, 1.0, 1.2, 0.8, 1.1];
+  let count = 0;
   let plotted = { mean: 0, sd: 1 };
   let animationFrame = 0;
   let choice = Math.floor(Math.random() * quotes.length);
@@ -135,7 +160,6 @@
   }
 
   function distribution() {
-    const count = Number(evidence.value);
     const sum = observations.slice(0, count).reduce((total, value) => total + value, 0);
     return { mean: sum / (1 + count), sd: 1 / Math.sqrt(1 + count) };
   }
@@ -144,14 +168,14 @@
     return Array.from({ length: 121 }, (_, index) => {
       const theta = -3 + index / 20;
       const density = Math.exp(-0.5 * ((theta - mean) / sd) ** 2) / (sd * Math.sqrt(2 * Math.PI));
-      return `${index ? "L" : "M"}${(12 + index * 376 / 120).toFixed(2)} ${(84 - density * 70 / 1.5).toFixed(2)}`;
+      return `${index ? "L" : "M"}${(12 + index * 376 / 120).toFixed(2)} ${(135 - density * 115 / 1.5).toFixed(2)}`;
     }).join(" ");
   }
 
   function drawPosterior(value) {
     const path = curve(value);
     posteriorCurve.setAttribute("d", path);
-    posteriorArea.setAttribute("d", path + " L388 84 L12 84 Z");
+    posteriorArea.setAttribute("d", path + " L388 135 L12 135 Z");
     plotted = value;
   }
 
@@ -159,14 +183,32 @@
     const target = distribution();
     const content = copy[document.documentElement.lang];
     const numbers = new Intl.NumberFormat(document.documentElement.lang, { maximumFractionDigits: 2 });
-    const observationLabel = Number(evidence.value) === 1 ? content.observation : content.observations;
-    evidenceCount.textContent = evidence.value;
-    evidence.setAttribute("aria-valuetext", `${evidence.value} ${observationLabel}`);
-    plotDescription.textContent = content.plotDescription
-      .replace("{n}", evidence.value)
-      .replace("{observations}", observationLabel)
-      .replace("{mean}", numbers.format(target.mean))
-      .replace("{sd}", numbers.format(target.sd));
+    const observationLabel = count === 1 ? content.observation : content.observations;
+    const values = {
+      n: String(count), observations: observationLabel,
+      value: count ? numbers.format(observations[count - 1]) : "",
+      mean: numbers.format(target.mean), sd: numbers.format(target.sd)
+    };
+    const format = text => text.replace(/\{(\w+)\}/g, (_, key) => values[key]);
+    plotDescription.textContent = format(content.plotDescription);
+    summary.textContent = count ? format(content.summary) : content.empty;
+    if (count === observations.length) summary.textContent += " " + content.finished;
+    const focusedAction = document.activeElement;
+    addObservation.disabled = count === observations.length;
+    resetObservations.disabled = count === 0;
+    if (focusedAction === addObservation && addObservation.disabled) resetObservations.focus({ preventScroll: true });
+    if (focusedAction === resetObservations && resetObservations.disabled) addObservation.focus({ preventScroll: true });
+    // Stack repeated values so every observation remains visible on the shared axis.
+    const seen = new Map();
+    observationPoints.replaceChildren(...observations.slice(0, count).map(value => {
+      const point = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      const stack = seen.get(value) || 0;
+      seen.set(value, stack + 1);
+      point.setAttribute("cx", (12 + (value + 3) * 376 / 6).toFixed(2));
+      point.setAttribute("cy", String(146 + stack * 8));
+      point.setAttribute("r", "2.8");
+      return point;
+    }));
     cancelAnimationFrame(animationFrame);
     if (!animate || reducedMotion.matches) {
       drawPosterior(target);
@@ -212,7 +254,25 @@
   }
 
   document.querySelector(".prior-curve").setAttribute("d", curve({ mean: 0, sd: 1 }));
-  evidence.addEventListener("input", () => updateInference(true));
+  explore.addEventListener("click", () => {
+    experiment.showModal();
+    document.body.classList.add("experiment-open");
+  });
+  closeExperiment.addEventListener("click", () => experiment.close());
+  experiment.addEventListener("close", () => {
+    document.body.classList.remove("experiment-open");
+    explore.focus({ preventScroll: true });
+  });
+  addObservation.addEventListener("click", () => {
+    if (count < observations.length) {
+      count += 1;
+      updateInference(true);
+    }
+  });
+  resetObservations.addEventListener("click", () => {
+    count = 0;
+    updateInference(true);
+  });
   reducedMotion.addEventListener("change", () => updateInference());
   replay.addEventListener("click", () => {
     screen.classList.remove("motion");
@@ -221,7 +281,7 @@
   });
   render(new URLSearchParams(location.search).get("lang") === "fi" ? "fi" : "en");
   languagePicker.hidden = false;
-  inference.hidden = false;
+  explore.hidden = false;
   languageButtons.forEach(button => {
     button.addEventListener("click", () => {
       const language = button.dataset.language;
