@@ -374,243 +374,115 @@ button:focus-visible,a:focus-visible,input:focus-visible {
   letter-spacing: .02em;
 }
 
-.stat-note {
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-family: Baskerville, Georgia, serif;
-  font-size: 14px;
-  letter-spacing: .025em;
-}
-
 .intro-actions {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 6px 22px;
 }
 
-.explore {
-  padding: 12px 0;
-  min-height: 44px;
-  border: 0;
-  background: transparent;
-  color: var(--accent);
-  font-size: 12px;
-  text-underline-offset: 5px;
+.signal-study {
+  width: min(100%, 400px);
+  margin: 24px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
 }
 
-.explore[hidden] {
+.signal-study[hidden], .motion-toggle[hidden] {
   display: none;
 }
 
-.explore:hover {
-  text-decoration: underline;
-}
-
-body.experiment-open {
-  overflow: hidden;
-}
-
-.experiment {
-  width: min(700px, calc(100% - 32px));
-  max-height: calc(100svh - 32px);
-  padding: 22px 32px 24px;
-  margin: auto;
-  overflow: auto;
-  overscroll-behavior: contain;
-  color: var(--ink);
-  background: #f8f6ef;
-  border: 1px solid var(--line);
-  box-shadow: 0 20px 80px #252b2729;
-}
-
-.experiment::backdrop {
-  background: #252b2766;
-  backdrop-filter: blur(3px);
-}
-
-.experiment-top {
+.signal-heading {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 12px;
+  gap: 12px;
+  color: var(--accent);
+  font-family: Baskerville, Georgia, serif;
+  font-size: 17px;
 }
 
-.experiment-eyebrow {
-  font-size: 11px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+.signal-tag {
   color: var(--muted);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  letter-spacing: .04em;
 }
 
-.experiment-close, .reset-observations {
+.signal-plot {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 6px;
+  overflow: visible;
+}
+
+.signal-links {
+  stroke: var(--accent);
+  stroke-width: .65;
+}
+
+.layer-node {
+  fill: #f8f6ef;
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+
+.wave-node {
+  fill: var(--accent);
+}
+
+.signal-wave {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+
+.signal-hint {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.solar-arc {
+  stroke: #ab874c;
+  stroke-width: 1.4;
+}
+
+.contour-offset {
+  transition: transform .25s ease-out;
+}
+
+.motion-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px 18px;
+}
+
+.motion-toggle {
   min-height: 44px;
-  padding: 10px 8px;
+  padding: 8px 0;
   border: 0;
   background: transparent;
   color: var(--muted);
-  font-size: 12px;
-}
-
-.experiment-close:hover, .reset-observations:hover:not(:disabled) {
-  color: var(--ink);
-}
-
-.experiment h2 {
-  margin: 0;
-  font-family: Baskerville, 'Palatino Linotype', Georgia, serif;
-  font-size: clamp(28px, 3vw, 34px);
-  line-height: 1.15;
-  font-weight: 400;
-  letter-spacing: -.035em;
-}
-
-.experiment-intro {
-  margin: 10px 0 16px;
-  max-width: 48ch;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--muted);
-}
-
-.inference {
-  margin: 0;
-  border-top: 1px solid var(--line);
-  padding: 12px 0;
-}
-
-.inference-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 18px;
-  color: var(--muted);
   font-size: 11px;
 }
 
-.inference-legend span::before {
-  content: "";
-  display: inline-block;
-  width: 12px;
-  margin-right: 4px;
-  vertical-align: middle;
-  border-top: 2px solid var(--accent);
-}
-
-.inference-legend .prior-label::before {
-  border-color: var(--muted);
-  border-top-style: dashed;
-}
-
-.inference-plot {
-  display: block;
-  width: 100%;
-  height: 172px;
-  overflow: visible;
-  margin: 14px 0 0;
-}
-
-.inference-plot path {
-  fill: none;
-  vector-effect: non-scaling-stroke;
-}
-
-.inference-plot text {
-  fill: var(--muted);
-  font-size: 12px;
-  font-family: Baskerville, Georgia, serif;
-}
-
-.plot-axis {
-  stroke: var(--line);
-}
-
-.prior-curve {
-  stroke: var(--muted);
-  stroke-width: 1;
-  stroke-dasharray: 3 4;
-}
-
-.posterior-curve {
-  stroke: var(--accent);
-  stroke-width: 1.6;
-}
-
-.inference-plot .posterior-area {
-  fill: var(--accent);
-  fill-opacity: .08;
-}
-
-.inference-legend .observation-label::before {
-  width: 5px;
-  height: 5px;
-  border: 0;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-.observation-points {
-  fill: var(--accent);
-}
-
-.plot-caption {
-  text-align: center;
-  color: var(--muted);
-  font-family: Baskerville, Georgia, serif;
-  font-size: 14px;
-  margin-top: 6px;
-}
-
-.experiment-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 18px;
-}
-
-.add-observation {
-  min-height: 44px;
-  padding: 12px 18px;
-  background: #38482f;
-  border: 1px solid #38482f;
-  border-radius: 2px;
-  color: white;
-  font-size: 12px;
-}
-
-.add-observation:hover:not(:disabled) {
-  background: #4b5d40;
-}
-
-.inference-summary {
-  display: block;
-  min-height: 3em;
-  margin: 14px 0 0;
+.motion-toggle:hover, .motion-toggle:active {
   color: var(--ink);
-  font-size: 12px;
-  line-height: 1.5;
-  font-variant-numeric: tabular-nums;
 }
 
-.model-note {
-  margin: 12px 0 0;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.6;
+.ambient-paused .portrait-stage:hover .sketch {
+  transform: none;
 }
 
-@media(max-width:600px) {
-  .experiment {
-    padding: 16px 22px 24px;
-  }
-  .experiment-top {
-    margin-bottom: 12px;
-  }
-  .experiment-intro {
-    margin-bottom: 18px;
-  }
+.ambient-paused .contour-offset {
+  transition: none;
+}
+
+@media(min-width:850px) and (max-height:760px) {
+  .signal-study { margin-top: 18px; }
 }
 
 @media(max-width:849px) {
@@ -651,8 +523,8 @@ body.experiment-open {
   .portrait-stage:hover .sketch {
     transform:none;
   }
-  .replay {
-    justify-self:start;
+  .motion-controls {
+    justify-content: flex-start;
   }
   .nav-right {
     gap:14px;
@@ -665,4 +537,16 @@ body.experiment-open {
     margin-left: 0;
     font-size:.69em;
   }
+}
+
+html {
+  scrollbar-color: #bdc3b5 #f8f6ef;
+  scrollbar-width: thin;
+}
+
+@media(forced-colors:active) {
+  html { scrollbar-color: auto; }
+  .layer-node { fill: Canvas; stroke: CanvasText; }
+  .wave-node { fill: CanvasText; }
+  .signal-wave, .signal-links { stroke: CanvasText; }
 }

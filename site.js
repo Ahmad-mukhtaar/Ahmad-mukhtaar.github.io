@@ -70,25 +70,12 @@
       "title": "Ahmad · Statistician & data scientist",
       "portrait": "Pencil portrait of Ahmad",
       "language": "Choose language",
-      "bayesLabel": "Bayes’ rule: posterior density is proportional to likelihood times prior density",
-      "explore": "Explore uncertainty ↗",
-      "experimentLabel": "A small experiment",
-      "experimentTitle": "How does new evidence change what we believe?",
-      "experimentIntro": "Each click adds a measurement (a dot). The curve moves as the estimated average changes; a narrower curve means less uncertainty.",
-      "close": "Close ×",
-      "addObservation": "Add an observation +",
-      "reset": "Reset",
-      "observed": "Observations",
-      "axisLabel": "Possible average values · θ",
-      "modelNote": "Dashed line: our starting belief. Solid line: our updated belief after seeing the measurements. This is a simplified example.",
-      "empty": "No observations yet. Both curves begin together.",
-      "summary": "{n} {observations} · latest measurement {value} · estimated average {mean}.",
-      "finished": "All 12 observations added. Reset to explore again.",
-      "prior": "Before evidence",
-      "posterior": "After evidence",
-      "observations": "observations",
-      "observation": "observation",
-      "plotDescription": "Illustrative Bayesian normal model. {n} {observations}; estimated mean {mean}; uncertainty, measured as posterior standard deviation, {sd}."
+      "signalTitle": "From noise to pattern",
+      "signalTag": "Illustration",
+      "signalHint": "Scattered dots settle into connected layers and a wave, then drift apart.",
+      "signalDescription": "An illustration of scattered dots forming connected layers and a wave.",
+      "pauseMotion": "Pause motion",
+      "resumeMotion": "Resume motion"
     },
     "fi": {
       "greeting": "Moi.",
@@ -101,25 +88,12 @@
       "title": "Ahmad · Tilastotieteilijä & datatieteilijä",
       "portrait": "Lyijykynämuotokuva Ahmadista ylioppilaslakissa",
       "language": "Valitse kieli",
-      "bayesLabel": "Bayesin kaava: posterioritiheys on verrannollinen uskottavuuden ja prioritiheyden tuloon",
-      "explore": "Tutki epävarmuutta ↗",
-      "experimentLabel": "Pieni kokeilu",
-      "experimentTitle": "Miten uudet havainnot muuttavat käsitystämme?",
-      "experimentIntro": "Jokainen painallus lisää mittauksen (pisteen). Käyrä siirtyy, kun keskiarvon arvio muuttuu; kapeampi käyrä tarkoittaa vähemmän epävarmuutta.",
-      "close": "Sulje ×",
-      "addObservation": "Lisää havainto +",
-      "reset": "Aloita alusta",
-      "observed": "Havainnot",
-      "axisLabel": "Keskiarvon mahdolliset arvot · θ",
-      "modelNote": "Katkoviiva: alkuoletuksemme. Yhtenäinen viiva: havaintojen perusteella päivitetty käsityksemme. Tämä on yksinkertaistettu esimerkki.",
-      "empty": "Ei vielä havaintoja. Käyrät ovat aluksi samat.",
-      "summary": "{n} {observations} · uusin mittaus {value} · keskiarvon arvio {mean}.",
-      "finished": "Kaikki 12 havaintoa lisätty. Aloita alusta kokeillaksesi uudelleen.",
-      "prior": "Ennen havaintoja",
-      "posterior": "Havaintojen jälkeen",
-      "observations": "havaintoa",
-      "observation": "havainto",
-      "plotDescription": "Bayesilaisen normaalimallin havainnollistus. {n} {observations}; keskiarvon estimaatti {mean}; epävarmuus posteriorin keskihajontana {sd}."
+      "signalTitle": "Kohinasta kuvioksi",
+      "signalTag": "Havainnollistus",
+      "signalHint": "Hajallaan olevat pisteet muodostavat kerroksia ja aallon, sitten ne hajaantuvat jälleen.",
+      "signalDescription": "Havainnollistus pisteistä, jotka muodostavat yhdistettyjä kerroksia ja aallon.",
+      "pauseMotion": "Pysäytä liike",
+      "resumeMotion": "Jatka liikettä"
     }
   };
   const screen = document.getElementById("warm");
@@ -128,22 +102,58 @@
   const quoteSource = document.querySelector(".quote a");
   const languagePicker = document.querySelector(".language");
   const languageButtons = [...document.querySelectorAll("[data-language]")];
-  const explore = document.getElementById("explore");
-  const experiment = document.getElementById("experiment");
-  const closeExperiment = document.getElementById("experiment-close");
-  const addObservation = document.getElementById("add-observation");
-  const resetObservations = document.getElementById("reset-observations");
-  const summary = document.getElementById("inference-summary");
-  const observationPoints = document.querySelector(".observation-points");
-  const posteriorCurve = document.querySelector(".posterior-curve");
-  const posteriorArea = document.querySelector(".posterior-area");
-  const plotDescription = document.getElementById("inference-description");
+  const signalStudy = document.querySelector(".signal-study");
+  const signalDescription = document.getElementById("signal-description");
+  const signalPoints = document.querySelector(".signal-points");
+  const signalLinks = document.querySelector(".signal-links");
+  const signalWave = document.querySelector(".signal-wave");
+  const portraitStage = document.querySelector(".portrait-stage");
+  const contourOffset = document.querySelector(".contour-offset");
+  const motionToggle = document.getElementById("motion-toggle");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  // Normal prior N(0, 1), known observation variance 1; illustrative observations.
-  const observations = [0.7, 1.2, 0.9, 1.4, 1.1, 0.8, 1.3, 0.6, 1.0, 1.2, 0.8, 1.1];
-  let count = 0;
-  let plotted = { mean: 0, sd: 1 };
-  let animationFrame = 0;
+  let motionPaused = false;
+  let pointerFrame = 0;
+  let signalFrame = 0;
+  let lastSignalTime = null;
+  let signalElapsed = 0;
+  let signalAmount = 0;
+
+  // A fresh visual composition per page load; no visitor identifier or tracking.
+  // This is a visual metaphor, not a fitted statistical model or trained network.
+  const layers = [
+    Array.from({ length: 6 }, (_, i) => ({ x: 24, y: 18 + i * 14 })),
+    Array.from({ length: 4 }, (_, i) => ({ x: 112, y: 26 + i * 18 })),
+    Array.from({ length: 4 }, (_, i) => ({ x: 200, y: 26 + i * 18 }))
+  ];
+  const phase = (Math.random() - .5) * .5;
+  const amplitude = 17 + Math.random() * 3;
+  const wave = Array.from({ length: 25 }, (_, i) => ({
+    x: 264 + i * 5.8,
+    y: 53 - Math.sin(i / 24 * Math.PI * 2 + phase) * amplitude
+  }));
+  const points = [...layers.flat(), ...wave].map((target, i) => {
+    const element = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    element.setAttribute("r", i < 14 ? "2.6" : "1.6");
+    element.setAttribute("class", i < 14 ? "layer-node" : "wave-node");
+    signalPoints.append(element);
+    return { target, origin: { x: 12 + Math.random() * 396, y: 10 + Math.random() * 86 }, element };
+  });
+  const links = [];
+  function link(from, to) {
+    const element = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    signalLinks.append(element);
+    links.push({ from, to, element });
+  }
+  // Sparse connections keep the small illustration readable.
+  for (let i = 0; i < 6; i++) {
+    link(i, 6 + i % 4);
+    link(i, 6 + (i + 1) % 4);
+  }
+  for (let i = 0; i < 4; i++) {
+    link(6 + i, 10 + i);
+    link(6 + i, 10 + (i + 1) % 4);
+    link(10 + i, 14);
+  }
   let choice = Math.floor(Math.random() * quotes.length);
 
   // Store only the last quote number; no visitor or contact information.
@@ -159,73 +169,72 @@
     // The page also works when browser storage is disabled.
   }
 
-  function distribution() {
-    const sum = observations.slice(0, count).reduce((total, value) => total + value, 0);
-    return { mean: sum / (1 + count), sd: 1 / Math.sqrt(1 + count) };
+  function renderSignal(amount = signalAmount) {
+    signalAmount = amount;
+    const positions = points.map(({ target, origin, element }) => {
+      const x = origin.x + (target.x - origin.x) * amount;
+      const y = origin.y + (target.y - origin.y) * amount;
+      element.setAttribute("cx", x.toFixed(2));
+      element.setAttribute("cy", y.toFixed(2));
+      return { x, y };
+    });
+    signalLinks.setAttribute("opacity", String(Math.max(0, (amount - .25) / .75) * .32));
+    links.forEach(({ from, to, element }) => {
+      element.setAttribute("x1", positions[from].x.toFixed(2));
+      element.setAttribute("y1", positions[from].y.toFixed(2));
+      element.setAttribute("x2", positions[to].x.toFixed(2));
+      element.setAttribute("y2", positions[to].y.toFixed(2));
+    });
+    signalWave.setAttribute("opacity", String(Math.max(0, (amount - .55) / .45)));
+    signalWave.setAttribute("d", positions.slice(14).map(({ x, y }, i) => `${i ? "L" : "M"}${x.toFixed(2)} ${y.toFixed(2)}`).join(" "));
   }
 
-  function curve({ mean, sd }) {
-    return Array.from({ length: 121 }, (_, index) => {
-      const theta = -3 + index / 20;
-      const density = Math.exp(-0.5 * ((theta - mean) / sd) ** 2) / (sd * Math.sqrt(2 * Math.PI));
-      return `${index ? "L" : "M"}${(12 + index * 376 / 120).toFixed(2)} ${(135 - density * 115 / 1.5).toFixed(2)}`;
-    }).join(" ");
+  // An 18-second loop: scatter, gather, rest, disperse. Ease both ends.
+  function patternAmount(elapsed) {
+    const seconds = (elapsed % 18000) / 1000;
+    const ease = value => value * value * (3 - 2 * value);
+    if (seconds < 2) return 0;
+    if (seconds < 7) return ease((seconds - 2) / 5);
+    if (seconds < 10) return 1;
+    if (seconds < 15) return 1 - ease((seconds - 10) / 5);
+    return 0;
   }
 
-  function drawPosterior(value) {
-    const path = curve(value);
-    posteriorCurve.setAttribute("d", path);
-    posteriorArea.setAttribute("d", path + " L388 135 L12 135 Z");
-    plotted = value;
-  }
-
-  function updateInference(animate = false) {
-    const target = distribution();
-    const content = copy[document.documentElement.lang];
-    const numbers = new Intl.NumberFormat(document.documentElement.lang, { maximumFractionDigits: 2 });
-    const observationLabel = count === 1 ? content.observation : content.observations;
-    const values = {
-      n: String(count), observations: observationLabel,
-      value: count ? numbers.format(observations[count - 1]) : "",
-      mean: numbers.format(target.mean), sd: numbers.format(target.sd)
-    };
-    const format = text => text.replace(/\{(\w+)\}/g, (_, key) => values[key]);
-    plotDescription.textContent = format(content.plotDescription);
-    summary.textContent = count ? format(content.summary) : content.empty;
-    if (count === observations.length) summary.textContent += " " + content.finished;
-    const focusedAction = document.activeElement;
-    addObservation.disabled = count === observations.length;
-    resetObservations.disabled = count === 0;
-    if (focusedAction === addObservation && addObservation.disabled) resetObservations.focus({ preventScroll: true });
-    if (focusedAction === resetObservations && resetObservations.disabled) addObservation.focus({ preventScroll: true });
-    // Stack repeated values so every observation remains visible on the shared axis.
-    const seen = new Map();
-    observationPoints.replaceChildren(...observations.slice(0, count).map(value => {
-      const point = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      const stack = seen.get(value) || 0;
-      seen.set(value, stack + 1);
-      point.setAttribute("cx", (12 + (value + 3) * 376 / 6).toFixed(2));
-      point.setAttribute("cy", String(146 + stack * 8));
-      point.setAttribute("r", "2.8");
-      return point;
-    }));
-    cancelAnimationFrame(animationFrame);
-    if (!animate || reducedMotion.matches) {
-      drawPosterior(target);
-      return;
+  function animateSignal(time) {
+    signalFrame = 0;
+    if (lastSignalTime === null) lastSignalTime = time;
+    const delta = time - lastSignalTime;
+    if (delta >= 1000 / 30) {
+      signalElapsed += Math.min(delta, 100);
+      lastSignalTime = time;
+      renderSignal(patternAmount(signalElapsed));
     }
-    const start = plotted;
-    const started = performance.now();
-    function frame(now) {
-      const progress = Math.min(1, (now - started) / 240);
-      const eased = 1 - (1 - progress) ** 3;
-      drawPosterior({
-        mean: start.mean + (target.mean - start.mean) * eased,
-        sd: start.sd + (target.sd - start.sd) * eased
-      });
-      if (progress < 1) animationFrame = requestAnimationFrame(frame);
+    signalFrame = requestAnimationFrame(animateSignal);
+  }
+
+  function updateSignalMotion() {
+    cancelAnimationFrame(signalFrame);
+    signalFrame = 0;
+    lastSignalTime = null;
+    if (reducedMotion.matches) {
+      renderSignal(1);
+    } else if (!motionPaused && !document.hidden) {
+      signalFrame = requestAnimationFrame(animateSignal);
     }
-    animationFrame = requestAnimationFrame(frame);
+  }
+
+  function resetContours() {
+    cancelAnimationFrame(pointerFrame);
+    pointerFrame = 0;
+    contourOffset.removeAttribute("transform");
+  }
+
+  function renderMotion() {
+    screen.classList.toggle("ambient-paused", motionPaused);
+    motionToggle.textContent = copy[document.documentElement.lang][motionPaused ? "resumeMotion" : "pauseMotion"];
+    motionToggle.hidden = reducedMotion.matches;
+    if (reducedMotion.matches || motionPaused) resetContours();
+    updateSignalMotion();
   }
 
   function render(language) {
@@ -240,7 +249,6 @@
     const portrait = document.querySelector(".sketch");
     portrait.alt = content.portrait;
     portrait.src = language === "fi" ? "portrait-vappu.png" : "portrait-sketch.png?v=watermarked";
-    document.querySelector(".stat-note").setAttribute("aria-label", content.bayesLabel);
     document.querySelector(".nav").setAttribute("aria-label", content.detail);
     languagePicker.setAttribute("aria-label", content.language);
     languageButtons.forEach(button => {
@@ -250,38 +258,40 @@
     quoteText.textContent = "“" + quote.text + "”";
     quoteSource.textContent = quote.by + " ↗";
     quoteSource.href = quote.url;
-    updateInference();
+    signalDescription.textContent = content.signalDescription;
+    renderSignal();
+    renderMotion();
   }
 
-  document.querySelector(".prior-curve").setAttribute("d", curve({ mean: 0, sd: 1 }));
-  explore.addEventListener("click", () => {
-    experiment.showModal();
-    document.body.classList.add("experiment-open");
+  document.addEventListener("visibilitychange", updateSignalMotion);
+  motionToggle.addEventListener("click", () => {
+    motionPaused = !motionPaused;
+    if (motionPaused) screen.classList.remove("motion");
+    renderMotion();
   });
-  closeExperiment.addEventListener("click", () => experiment.close());
-  experiment.addEventListener("close", () => {
-    document.body.classList.remove("experiment-open");
-    explore.focus({ preventScroll: true });
+  reducedMotion.addEventListener("change", renderMotion);
+  portraitStage.addEventListener("pointermove", event => {
+    if (event.pointerType !== "mouse" || reducedMotion.matches || motionPaused) return;
+    cancelAnimationFrame(pointerFrame);
+    const bounds = portraitStage.getBoundingClientRect();
+    const x = Math.max(-6, Math.min(6, ((event.clientX - bounds.left) / bounds.width - .5) * 12));
+    const y = Math.max(-6, Math.min(6, ((event.clientY - bounds.top) / bounds.height - .5) * 12));
+    pointerFrame = requestAnimationFrame(() => {
+      contourOffset.setAttribute("transform", `translate(${x.toFixed(2)} ${y.toFixed(2)})`);
+      pointerFrame = 0;
+    });
   });
-  addObservation.addEventListener("click", () => {
-    if (count < observations.length) {
-      count += 1;
-      updateInference(true);
-    }
-  });
-  resetObservations.addEventListener("click", () => {
-    count = 0;
-    updateInference(true);
-  });
-  reducedMotion.addEventListener("change", () => updateInference());
+  portraitStage.addEventListener("pointerleave", resetContours);
   replay.addEventListener("click", () => {
+    motionPaused = false;
+    renderMotion();
     screen.classList.remove("motion");
     void screen.offsetWidth;
     screen.classList.add("motion");
   });
   render(new URLSearchParams(location.search).get("lang") === "fi" ? "fi" : "en");
   languagePicker.hidden = false;
-  explore.hidden = false;
+  signalStudy.hidden = false;
   languageButtons.forEach(button => {
     button.addEventListener("click", () => {
       const language = button.dataset.language;
